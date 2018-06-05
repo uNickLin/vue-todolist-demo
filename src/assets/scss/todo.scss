@@ -2,14 +2,16 @@ article.todo{
   border: 1px solid rgba(0, 0, 0, .2);
   box-shadow: 0 0 10px rgba(0, 0, 0, .1);
   border-radius: 3px;
-  margin-bottom: 5px;
   background: $white;
+  &:not(:last-of-type){
+    margin-bottom: 5px;
+  }
   &.important{
     background: $milkyellow;
   }
   .brief_content{
     @include flex(flex-start, flex-start);
-    padding: 10px 30px;
+    padding: 10px 10px 10px 30px;
     position: relative;
     &:hover{
       a.drag_handler{
@@ -92,6 +94,9 @@ article.todo{
           &.fas.fa-star{
             opacity: 1;
           }
+        }
+        &:first-of-type{
+          margin-right: 4px;
         }
         &:hover{
           i{

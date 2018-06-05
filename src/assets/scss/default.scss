@@ -1,8 +1,41 @@
 body{
   background-color: $grey;
-  height: 100vh;
+  height: 100%;
+  font-size: 14px;
   main{
     margin-top: $navHeight;
     height: calc(100vh - 60px);
+    overflow: scroll;
+    padding: 20px 0;
+    .field{
+      textarea{
+        height: 150px;
+        resize: vertical;
+      }
+    }
+  }
+
+  .right-in-left-out-enter{
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  .right-in-left-out-enter-active, .right-in-left-out-leave-active{
+    transition: .3s linear;
+  }
+  .right-in-left-out-leave-to{
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+
+  .left-in-right-out-enter{
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  .left-in-right-out-enter-active, .left-in-right-out-leave-active{
+    transition: .3s linear;
+  }
+  .left-in-right-out-leave-to{
+    opacity: 0;
+    transform: translateX(50px);
   }
 }

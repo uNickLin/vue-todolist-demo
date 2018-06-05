@@ -1,38 +1,45 @@
 <template lang="pug">
   main#index
     .todo_container
-      .add_todo
-      .todo_list.importants
-        todo(
-          v-for='event in importantTodos', 
-          :key='event.id', 
-          :todo='event', 
-          @toggleFullContent='accordionTodo(event)',
-          @toggleImportant='changeImportant(event)',
-          @toggleCompleted='changeCompleted(event)',
-          @deleteTodo='deleteTodo(event)')
-      .todo_list
-        todo(
-          v-for='event in commonTodos', 
-          :key='event.id', 
-          :todo='event', 
-          @toggleFullContent='accordionTodo(event)',
-          @toggleImportant='changeImportant(event)',
-          @toggleCompleted='changeCompleted(event)',
-          @deleteTodo='deleteTodo(event)')
+      transition(
+        v-if='currentView === "add todo"',
+        name='right-in-left-out',
+        mode='out-in')
+        add-todo(@changeView='currentView = "overview"')
+      transition(
+        v-if='currentView === "overview"',
+        name='left-in-right-out',
+        mode='out-in')
+        todo-list(
+          :currentTab='currentTab',
+          :todos='todos',
+          :tabList='tabList',
+          @changeTab='changeTab',
+          @changeView='currentView = "add todo"',
+          @toggleFullContent='toggleFullContent',
+          @toggleImportant='toggleImportant',
+          @toggleCompleted='toggleCompleted',
+          @deleteTodo='deleteTodo')
       
 </template>
 
 
 <script>
-import Todo from './Todo'
+import AddTodo from './AddTodo'
+import TodoList from './TodoList'
+
 export default {
   name: 'hello',
   components: {
-    Todo
+    AddTodo, TodoList
   },
   data () {
     return {
+      currentView: 'overview',
+      currentTab: 'My Tasks',
+      tabList: [
+        'My Tasks', 'In Progress', 'Completed'
+      ],
       todos: [
         {
           id: 1,
@@ -68,40 +75,35 @@ export default {
     }
   },
   methods: {
-    accordionTodo(event) {
-      if (event.isOpen) event.isOpen = false
+    changeTab(tab) {
+      this.currentTab = tab
+    },
+    toggleFullContent(todo) {
+      if (todo.isOpen) todo.isOpen = false
       else {
         this.todos.forEach(todo => todo.isOpen = false)
-        event.isOpen = true
+        todo.isOpen = true
       }
     },
-    changeImportant(event) {
-      event.isImportant = !event.isImportant
+    toggleImportant(todo) {
+      todo.isImportant = !todo.isImportant
     },
-    changeCompleted(event) {
-      event.isCompleted = !event.isCompleted
+    toggleCompleted(todo) {
+      todo.isCompleted = !todo.isCompleted
     },
-    deleteTodo(event) {
+    deleteTodo(targetTodo) {
       this.$alert({
         title: '確定要刪除此項嗎?',
-        text: `${event.title}`,
+        text: `${targetTodo.title}`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonText: '確定',
         cancelButtonText: '取消'
       }).then(res => {
         if (res.value) {
-          this.todos = this.todos.filter(todo => todo.id !== event.id)
+          this.todos = this.todos.filter(todo => todo.id !== targetTodo.id)
         }
       })
-    }
-  },
-  computed: {
-    importantTodos() {
-      return this.todos.filter(todo => todo.isImportant)
-    },
-    commonTodos() {
-      return this.todos.filter(todo => !todo.isImportant)
     }
   }
 }

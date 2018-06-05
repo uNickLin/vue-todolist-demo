@@ -1,0 +1,28 @@
+#status_tabs{
+  width: 100%;
+  ul{
+    @include flex;
+    height: 100%;
+    border-radius: 5px 5px 0 0;
+    background: $white;
+    border-bottom: 1px solid $grey;
+    li{
+      width: 33.3%;
+      a{
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 15px;
+        color: $darkgrey;
+        transition: color .2s;
+        border-bottom: 5px solid transparent;        
+        &:hover, &.active{
+          color: $darkgreen;
+        }
+        &.active{
+          border-bottom: 5px solid $darkgreen;
+        }
+      }
+    }
+  }
+}
