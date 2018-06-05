@@ -1,0 +1,12 @@
+$grey: #c8c8c8;
+$blue: #4a90e2;
+$white: #f2f2f2;
+
+$navHeight: 60px;
+
+
+@mixin flex($alignItem: center, $justifyContent: center) {
+  display: flex;
+  align-items: $alignItem;
+  justify-content: $justifyContent;
+}
