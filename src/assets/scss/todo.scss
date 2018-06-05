@@ -4,6 +4,9 @@ article.todo{
   border-radius: 3px;
   margin-bottom: 5px;
   background: $white;
+  &.important{
+    background: $milkyellow;
+  }
   .brief_content{
     @include flex(flex-start, flex-start);
     padding: 10px 30px;

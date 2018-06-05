@@ -1,5 +1,5 @@
 <template lang="pug">
-  article.todo
+  article.todo(:class='{important: todo.isImportant}')
     .brief_content(@click='$emit("toggleFullContent")')
       a.drag_handler
         i.fas.fa-ellipsis-v
