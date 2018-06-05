@@ -25,7 +25,7 @@
           i(:class='todo.isImportant ? "fas fa-star" : "far fa-star"')
         a(@click.stop='')
           i.fas.fa-pencil-alt
-        a(@click.stop='')
+        a(@click.stop='$emit("deleteTodo")')
           i.fas.fa-trash-alt
 
     .full_content(:class='{active: todo.isOpen}')
@@ -55,11 +55,6 @@
   export default {
     props: [
       'todo'
-    ],
-    methods: {
-      name() {
-        
-      }
-    },
+    ]
   }
 </script>

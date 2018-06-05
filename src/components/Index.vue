@@ -9,7 +9,8 @@
           :todo='event', 
           @toggleFullContent='accordionTodo(event)',
           @toggleImportant='changeImportant(event)',
-          @toggleCompleted='changeCompleted(event)')
+          @toggleCompleted='changeCompleted(event)',
+          @deleteTodo='deleteTodo(event)')
       .todo_list
         todo(
           v-for='event in commonTodos', 
@@ -17,7 +18,8 @@
           :todo='event', 
           @toggleFullContent='accordionTodo(event)',
           @toggleImportant='changeImportant(event)',
-          @toggleCompleted='changeCompleted(event)')
+          @toggleCompleted='changeCompleted(event)',
+          @deleteTodo='deleteTodo(event)')
       
 </template>
 
@@ -78,6 +80,22 @@ export default {
     },
     changeCompleted(event) {
       event.isCompleted = !event.isCompleted
+    },
+    deleteTodo(event) {
+      this.$alert({
+        title: '確定要刪除此項嗎?',
+        text: `${event.title}`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: '確定',
+        cancelButtonText: '取消'
+      }).then(res => {
+        this.todos = this.todos.filter(todo => todo.id !== event.id)
+        Swal(
+          '刪除成功',
+          'success'
+        )
+      })
     }
   },
   computed: {

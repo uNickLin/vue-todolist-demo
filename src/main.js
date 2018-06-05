@@ -3,6 +3,9 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import Swal from 'sweetalert2'
+
+Vue.prototype.$alert = Swal
 
 Vue.config.productionTip = false
 
