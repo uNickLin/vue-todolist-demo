@@ -90,11 +90,9 @@ export default {
         confirmButtonText: '確定',
         cancelButtonText: '取消'
       }).then(res => {
-        this.todos = this.todos.filter(todo => todo.id !== event.id)
-        Swal(
-          '刪除成功',
-          'success'
-        )
+        if (res.value) {
+          this.todos = this.todos.filter(todo => todo.id !== event.id)
+        }
       })
     }
   },
