@@ -1,7 +1,7 @@
 <template lang="pug">
-  form#add_todo_template
+  form#add_todo_template(@submit.prevent='addTodo')
     .add_todo_head
-      a(@click='$emit("changeView")')
+      a(@click='cancelAdd')
         i.fas.fa-chevron-left
       h2 New Todo
       a(@click='newTodo.isImportant = !newTodo.isImportant')
@@ -22,10 +22,10 @@
         label Comment
         textarea.input(v-model='newTodo.comment')
     .add_todo_footer
-      button.cancel 
+      button(@click.prevent='cancelAdd').cancel 
         i.fas.fa-times
         span Cancel
-      button(@submit='submit').save 
+      button(@submit='addTodo').save 
         i.fas.fa-save
         span Save
 </template>
@@ -47,8 +47,23 @@
       }
     },
     methods: {
-      submit() {
-        alert('done!')
+      cancelAdd() {
+        this.$alert({
+          title: 'Leaving?',
+          text: 'Data will lost.',
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Yes',
+          cancelButtonText: 'No'
+        }).then(res => {
+          if (res.value) {
+            this.$emit("changeView")
+          }
+        })
+      },
+      addTodo() {
+        this.$emit('addTodo', this.newTodo)
+        this.$emit("changeView")
       }
     },
   }

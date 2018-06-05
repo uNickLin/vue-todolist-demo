@@ -12,14 +12,17 @@
           type="checkbox", 
           :checked='todo.isCompleted')
       .todo_main_head(:class='{completed: todo.isCompleted}')
-        h2(v-if='!todo.isEditing') {{ todo.title }}
+        h2(v-if='!todo.isEditing') {{ todo.title.replace(/\b\w/g, l => l.toUpperCase()) }}
         input.input(
           v-if='todo.isEditing', 
           type="text", 
           v-model='todo.title')
-        .todo_deadline
-          i.far.fa-calendar-alt
-          span {{ todo.deadline }}
+        .todo_detail
+          .todo_deadline(v-if='todo.deadline')
+            i.far.fa-calendar-alt
+            span {{ todo.deadline }}
+          .todo_comment(v-if='todo.comment')
+            i.far.fa-comment-dots
       .todo_main_actions
         a(@click.stop='$emit("toggleImportant", todo)')
           i(:class='todo.isImportant ? "fas fa-star" : "far fa-star"')

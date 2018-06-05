@@ -6,23 +6,12 @@
   top: 0;
   left: 0;
   z-index: 5;
-  ul{
-    @include flex;
-    height: 100%;
-    li{
-      a{
-        display: block;
-        padding: 15px;
-        color: $darkgreen;
-        transition: color .2s;
-        border-bottom: 5px solid transparent;        
-        &:hover, &.active{
-          color: $white;
-        }
-        &.active{
-          border-bottom: 5px solid $darkgreen;
-        }
-      }
-    }
+  h1{
+    line-height: 60px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 2rem;
+    letter-spacing: .2rem;
+    color: $white;
   }
 }

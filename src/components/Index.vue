@@ -5,7 +5,9 @@
         v-if='currentView === "add todo"',
         name='right-in-left-out',
         mode='out-in')
-        add-todo(@changeView='currentView = "overview"')
+        add-todo(
+          @changeView='currentView = "overview", currentTab="My Tasks"',
+          @addTodo='addTodo')
       transition(
         v-if='currentView === "overview"',
         name='left-in-right-out',
@@ -15,7 +17,7 @@
           :todos='todos',
           :tabList='tabList',
           @changeTab='changeTab',
-          @changeView='currentView = "add todo"',
+          @changeView='currentView = "add todo", currentTab="My Tasks"',
           @toggleFullContent='toggleFullContent',
           @toggleImportant='toggleImportant',
           @toggleCompleted='toggleCompleted',
@@ -93,17 +95,20 @@ export default {
     },
     deleteTodo(targetTodo) {
       this.$alert({
-        title: '確定要刪除此項嗎?',
+        title: 'Are you sure?',
         text: `${targetTodo.title}`,
         type: 'warning',
         showCancelButton: true,
-        confirmButtonText: '確定',
-        cancelButtonText: '取消'
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No'
       }).then(res => {
         if (res.value) {
           this.todos = this.todos.filter(todo => todo.id !== targetTodo.id)
         }
       })
+    },
+    addTodo(newTodo) {
+      this.todos.unshift(newTodo)
     }
   }
 }
