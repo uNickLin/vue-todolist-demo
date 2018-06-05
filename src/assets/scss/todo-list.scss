@@ -1,0 +1,35 @@
+#todo_list{
+  .add_info{
+    @include flex(flex-end, space-between);
+    padding: 5px 0 10px 0;
+    a{
+      font-size: 0.8rem;
+      padding: 5px 10px;
+      background: $green;
+      color: $white;
+      border-radius: 3px;
+      cursor: pointer;
+      border: 1px solid rgba($darkgreen, .2);
+      box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+      i{
+        margin-right: 5px;
+      }
+      label{
+        cursor: pointer;
+      }
+    }
+    span{
+      font-size: 0.6rem;
+    }
+  }
+  .list_container{
+    background: $white;
+    border-radius: 0 0 5px 5px;
+    .todo_list{
+      padding: 5px;
+      &:not(:last-of-type){
+        padding-bottom: 0;
+      }
+    }
+  }
+}

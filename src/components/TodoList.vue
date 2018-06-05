@@ -9,6 +9,8 @@
       :currentTab='currentTab', 
       :tabs='tabList',
       @changeTab='changeTab')
+    .list_container.empty(v-if='todesFiltered.length === 0')
+      p Try to add something.
     .list_container
       .todo_list.importants(v-if='importantTodos.length > 0')
         todo(
