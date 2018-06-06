@@ -169,6 +169,7 @@
       },
       saveEdit() {
         this.tempTodo.deadline = this.startTime.time
+        this.tempTodo.isImportant = this.todo.isImportant
         this.$store.commit('saveUpdateTodo', this.tempTodo)
       }
     },

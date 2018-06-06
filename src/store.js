@@ -62,7 +62,8 @@ export const store = new Vuex.Store({
       }
     },
     toggleImportant(state, todo) {
-      todo.isImportant = !todo.isImportant
+			todo.isImportant = !todo.isImportant
+			store.commit('saveLocalTodoList')
     },
     toggleEditing(state, targetTodo) {
       targetTodo.isEditing = true
@@ -73,7 +74,8 @@ export const store = new Vuex.Store({
       })
     },
     toggleCompleted(state, todo) {
-      todo.isCompleted = !todo.isCompleted
+			todo.isCompleted = !todo.isCompleted
+			store.commit('saveLocalTodoList')
     },
     saveUpdateTodo(state, updateTodo) {
       let updateTarget = state.todos.find(todo => todo.id === updateTodo.id)
@@ -81,7 +83,8 @@ export const store = new Vuex.Store({
       updateTarget.deadline = updateTodo.deadline
       updateTarget.comment = updateTodo.comment
       updateTarget.isImportant = updateTodo.isImportant
-      updateTarget.isEditing = false
+			updateTarget.isEditing = false
+			store.commit('saveLocalTodoList')
     },
     deleteTodo(state, targetTodo) {
       Swal({
@@ -93,13 +96,23 @@ export const store = new Vuex.Store({
         cancelButtonText: 'No'
       }).then(res => {
         if (res.value) {
-          state.todos = state.todos.filter(todo => todo.id !== targetTodo.id)
+					state.todos = state.todos.filter(todo => todo.id !== targetTodo.id)
+					store.commit('saveLocalTodoList')
         }
       })
     },
     addTodo(state, newTodo) {
 			state.todos.unshift(newTodo)
 			state.nextTodoId++
-    }
+			store.commit('saveLocalTodoList')
+		},
+		saveLocalTodoList(state) {
+			localStorage.setItem('vTODOlist', JSON.stringify(state.todos))
+			localStorage.setItem('vTODONextId', state.nextTodoId)
+		},
+		getLocalTodoList(state) {
+			state.todos = JSON.parse(localStorage.getItem('vTODOlist'))
+			state.nextTodoId = localStorage.getItem('vTODONextId')
+		}
 	}
 })

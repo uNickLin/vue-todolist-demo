@@ -12,6 +12,9 @@ export default {
   name: 'app',
   components: {
     AppNav
+  },
+  mounted() {
+    this.$store.commit('getLocalTodoList')
   }
 }
 </script>
