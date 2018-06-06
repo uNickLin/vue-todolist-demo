@@ -39,6 +39,10 @@
     }
     span{
       font-size: 0.6rem;
+      @media (max-width: 478px) {
+        width: 100%;
+        text-align: center;
+      }
     }
   }
   .list_container{

@@ -6,6 +6,7 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
 	state: {
+		hasNotify: false,
 		currentView: 'overview',
 		currentTab: 'My Tasks',
 		tabList: [
@@ -46,6 +47,10 @@ export const store = new Vuex.Store({
 		]
 	},
 	mutations: {
+		closeNotify(state) {
+			state.hasNotify = true
+			localStorage.setItem('vTODOHasNotify', JSON.stringify(state.hasNotify))
+		},
 		changeView(state, view) {
 			state.currentView = view
 		},
@@ -118,6 +123,7 @@ export const store = new Vuex.Store({
 			})
 			state.todos = localdata
 			state.nextTodoId = parseInt(localStorage.getItem('vTODONextId')) || 0
+			state.hasNotify = JSON.parse(localStorage.getItem('vTODOHasNotify')) || false
 		}
 	}
 })

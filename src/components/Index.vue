@@ -1,5 +1,9 @@
 <template lang="pug">
   main#index
+    #add_to_homescreen_notification(v-if='!$store.state.hasNotify')
+      .close_notification(@click='$store.commit("closeNotify")') ×
+      p Try to 'add to home screen' on Safari !
+      img(src="/static/img/icon-add-home-screen.png", alt="")
     #mask(:class='{active: isSomeoneEditing}')
     .todo_container
       transition(
