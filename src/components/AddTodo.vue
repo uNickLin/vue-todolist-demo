@@ -122,14 +122,14 @@
           cancelButtonText: 'No'
         }).then(res => {
           if (res.value) {
-            this.$emit("changeView")
+            this.$store.commit("changeView", "overview")
           }
         })
       },
       addTodo() {
         this.newTodo.deadline = this.startTime.time
-        this.$emit('addTodo', this.newTodo)
-        this.$emit("changeView")
+        this.$store.commit('addTodo', this.newTodo)
+        this.$store.commit("changeView", "overview")
       }
     },
   }

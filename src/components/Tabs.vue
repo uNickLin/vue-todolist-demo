@@ -4,7 +4,7 @@
       li(v-for='tab in tabs')
         a(
           :class='{active: currentTab === tab}', 
-          @click='$emit("changeTab", tab)') {{ tab }}
+          @click='$store.commit("changeTab", tab)') {{ tab }}
 </template>
 
 <script>

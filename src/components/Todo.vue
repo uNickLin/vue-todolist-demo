@@ -3,11 +3,11 @@
     :class='{important: todo.isImportant, on_editing: todo.isEditing}',
     @submit.prevent='saveEdit'
     )
-    .brief_content(@click='$emit("toggleFullContent", todo)')
+    .brief_content(@click='$store.commit("toggleFullContent", todo)')
       a.drag_handler
         i.fas.fa-ellipsis-v
       label(
-        @click.stop='$emit("toggleCompleted", todo)', 
+        @click.stop='$store.commit("toggleCompleted", todo)', 
         :class='{checked: todo.isCompleted}')
         i.fas.fa-check(:class='{"checked-in": todo.isCompleted}')
         input(
@@ -29,11 +29,11 @@
           .todo_comment(v-if='todo.comment')
             i.far.fa-comment-dots
       .todo_main_actions
-        a(@click.stop='$emit("toggleImportant", todo)')
+        a(@click.stop='$store.commit("toggleImportant", todo)')
           i(:class='todo.isImportant ? "fas fa-star" : "far fa-star"')
         a(@click.stop='editTodo(todo)')
           i.fas.fa-edit(:class='{on_editing: todo.isEditing}')
-        a(@click.stop='$emit("deleteTodo", todo)')
+        a(@click.stop='$store.commit("deleteTodo", todo)')
           i.fas.fa-trash-alt
 
     .full_content(:class='{active: todo.isOpen}')
@@ -151,7 +151,7 @@
       editTodo(todo) {
         this.tempTodo = Object.assign({}, todo)
         this.startTime.time = this.tempTodo.deadline
-        this.$emit("toggleEditing", todo) // only change status
+        this.$store.commit("toggleEditing", todo) // only change status
       },
       cancelEdit() {
         this.$alert({
@@ -169,7 +169,7 @@
       },
       saveEdit() {
         this.tempTodo.deadline = this.startTime.time
-        this.$emit('saveUpdateTodo', this.tempTodo)
+        this.$store.commit('saveUpdateTodo', this.tempTodo)
       }
     },
     filters: {

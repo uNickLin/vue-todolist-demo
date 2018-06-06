@@ -1,14 +1,13 @@
 <template lang="pug">
   #todo_list
     .add_info
-      a(@click='$emit("changeView")')
+      a(@click='$store.commit("changeView", "add todo")')
         i.fas.fa-pencil-alt
         label New Todo
       span {{ doneTodosCount }} todos has done, {{ undoneTodosCount }} todos left.
     tabs(
       :currentTab='currentTab', 
-      :tabs='tabList',
-      @changeTab='changeTab')
+      :tabs='tabList')
     .list_container
       .empty(v-if='todesFiltered.length === 0')
         p {{ emptyText }}
@@ -16,61 +15,30 @@
         todo(
           v-for='event in importantTodos', 
           :key='event.id', 
-          :todo='event', 
-          @toggleFullContent='toggleFullContent',
-          @toggleImportant='toggleImportant',
-          @toggleEditing='toggleEditing',
-          @toggleCompleted='toggleCompleted',
-          @saveUpdateTodo='saveUpdateTodo',
-          @deleteTodo='deleteTodo')
+          :todo='event')
       .todo_list(v-if='commonTodos.length > 0')
         todo(
           v-for='event in commonTodos', 
           :key='event.id', 
-          :todo='event', 
-          @toggleFullContent='toggleFullContent',
-          @toggleImportant='toggleImportant',
-          @toggleEditing='toggleEditing',
-          @toggleCompleted='toggleCompleted',
-          @saveUpdateTodo='saveUpdateTodo',
-          @deleteTodo='deleteTodo')
+          :todo='event')
 </template>
 
 <script>
   import Tabs from './Tabs'
   import Todo from './Todo'
+  import {mapState} from 'vuex'
 
   export default {
     components: {
       Tabs, Todo
     },
-    props: [
-      'currentTab', 'todos', 'tabList'
-    ],
-    methods: {
-      changeTab(tab) {
-        this.$emit('changeTab', tab)
-      },
-      toggleFullContent(todo) {
-        this.$emit('toggleFullContent', todo)
-      },
-      toggleImportant(todo) {
-        this.$emit('toggleImportant', todo)
-      },
-      toggleEditing(todo) {
-        this.$emit('toggleEditing', todo)
-      },
-      toggleCompleted(todo) {
-        this.$emit('toggleCompleted', todo)
-      },
-      saveUpdateTodo(updateTodo) {
-        this.$emit('saveUpdateTodo', updateTodo)
-      },
-      deleteTodo(todo) {
-        this.$emit('deleteTodo', todo)
-      }
-    },
     computed: {
+      ...mapState([
+        'currentView',
+        'currentTab',
+        'tabList',
+        'todos'
+      ]),
       emptyText() {
         if (this.todos.length === 0) {
           return 'Try to add something.'
