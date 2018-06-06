@@ -13,6 +13,10 @@
     box-shadow: 0 0 15px rgba(0,0,0, .5);
     border-radius: 5px;
     animation: jumpNotification 2s ease-in-out infinite;
+    display: none;
+    @media (max-width: 478px) {
+      display: block;
+    }
     &:after{
       position: absolute;
       display: block;
