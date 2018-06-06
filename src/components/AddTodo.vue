@@ -22,10 +22,10 @@
         label Comment
         textarea.input(v-model='newTodo.comment')
     .add_todo_footer
-      button(@click.prevent='cancelAdd').cancel 
+      button(@click.prevent='cancelAdd').cancel.form_btn
         i.fas.fa-times
         span Cancel
-      button(@submit='addTodo').save 
+      button(@submit='addTodo').save.form_btn
         i.fas.fa-save
         span Save
 </template>

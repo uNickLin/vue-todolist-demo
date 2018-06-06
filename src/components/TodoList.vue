@@ -19,6 +19,7 @@
           :todo='event', 
           @toggleFullContent='toggleFullContent',
           @toggleImportant='toggleImportant',
+          @toggleEditing='toggleEditing',
           @toggleCompleted='toggleCompleted',
           @deleteTodo='deleteTodo')
       .todo_list(v-if='commonTodos.length > 0')
@@ -28,6 +29,7 @@
           :todo='event', 
           @toggleFullContent='toggleFullContent',
           @toggleImportant='toggleImportant',
+          @toggleEditing='toggleEditing',
           @toggleCompleted='toggleCompleted',
           @deleteTodo='deleteTodo')
 </template>
@@ -52,6 +54,9 @@
       },
       toggleImportant(todo) {
         this.$emit('toggleImportant', todo)
+      },
+      toggleEditing(todo) {
+        this.$emit('toggleEditing', todo)
       },
       toggleCompleted(todo) {
         this.$emit('toggleCompleted', todo)

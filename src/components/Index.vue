@@ -1,5 +1,6 @@
 <template lang="pug">
   main#index
+    #mask(:class='{active: isSomeoneEditing}')
     .todo_container
       transition(
         v-if='currentView === "add todo"',
@@ -20,6 +21,7 @@
           @changeView='currentView = "add todo", currentTab="My Tasks"',
           @toggleFullContent='toggleFullContent',
           @toggleImportant='toggleImportant',
+          @toggleEditing='toggleEditing',
           @toggleCompleted='toggleCompleted',
           @deleteTodo='deleteTodo')
       
@@ -51,7 +53,7 @@ export default {
           isImportant: false,
           isEditing: false,
           isCompleted: false,
-          isOpen: false
+          isOpen: true
         },
         {
           id: 2,
@@ -80,15 +82,25 @@ export default {
     changeTab(tab) {
       this.currentTab = tab
     },
-    toggleFullContent(todo) {
-      if (todo.isOpen) todo.isOpen = false
-      else {
-        this.todos.forEach(todo => todo.isOpen = false)
-        todo.isOpen = true
+    toggleFullContent(targetTodo) {
+      if (!targetTodo.isEditing) {
+        targetTodo.isOpen = !targetTodo.isOpen
+        this.todos.filter(todo => todo.id !== targetTodo.id).forEach(todo => {
+          todo.isEditing = false
+          todo.isOpen = false
+        })
       }
     },
     toggleImportant(todo) {
       todo.isImportant = !todo.isImportant
+    },
+    toggleEditing(targetTodo) {
+      targetTodo.isEditing = true
+      targetTodo.isOpen = true
+      this.todos.filter(todo => todo.id !== targetTodo.id).forEach(todo => {
+        todo.isEditing = false
+        todo.isOpen = false
+      })
     },
     toggleCompleted(todo) {
       todo.isCompleted = !todo.isCompleted
@@ -109,6 +121,12 @@ export default {
     },
     addTodo(newTodo) {
       this.todos.unshift(newTodo)
+    }
+  },
+  computed: {
+    isSomeoneEditing() {
+      if (this.todos.some(todo => todo.isEditing)) return true
+      else return false
     }
   }
 }

@@ -1,8 +1,12 @@
-article.todo{
+form.todo{
   border: 1px solid rgba(0, 0, 0, .2);
   box-shadow: 0 0 10px rgba(0, 0, 0, .1);
   border-radius: 3px;
   background: $white;
+  &.on_editing{
+    position: relative;
+    z-index: 11;
+  }
   &:not(:last-of-type){
     margin-bottom: 5px;
   }
@@ -71,6 +75,7 @@ article.todo{
       }
       h2{
         font-weight: bold;
+        font-size: 1.2rem;
         transition: .65s cubic-bezier(0.25, 0.8, 0.25, 1);
       }
       .todo_detail{
@@ -97,7 +102,23 @@ article.todo{
         color: $darkgreen;
         i{
           opacity: 0.7;
+          transition: .65s;
           &.fas.fa-star{
+            opacity: 1;
+            animation: scaleStar .65s;
+            @keyframes scaleStar {
+              0%{
+                transform: scale(.7);
+              }
+              50%{
+                transform: scale(1.2);                
+              }
+              100%{
+                transform: scale(1);                
+              }
+            }
+          }
+          &.on_editing{
             opacity: 1;
           }
         }
@@ -115,8 +136,20 @@ article.todo{
   .full_content{
     max-height: 0px;
     overflow: hidden;
+    border-top: 1px solid $grey;
     &.active{
+      padding: 10px 10px 10px 30px;
       max-height: fit-content;
     }
+    .field{
+      i{
+        margin-right: 10px;
+      }
+    }
+  }
+  .event_actions{
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 -3px 5px rgba(0, 0, 0, .1);
+    overflow: hidden;
   }
 }

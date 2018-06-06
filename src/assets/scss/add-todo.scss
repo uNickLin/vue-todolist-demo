@@ -38,32 +38,6 @@
     padding: 10px;
   }
   .add_todo_footer{
-    button{
-      width: 50%;
-      height: 50px;
-      line-height: 50px;
-      background: $purewhite;
-      box-shadow: 0 -3px 5px rgba(0, 0, 0, .1);
-      transition: .1s linear;
-      border: none;
-      cursor: pointer;
-      i{
-        margin-right: 10px;
-      }
-      &.cancel{
-        color: $red;
-        &:hover{
-          background: $red;
-          color: $white;
-        }
-      }
-      &.save{
-        color: $green;
-        &:hover{
-          background: $green;
-          color: $white;
-        }
-      }
-    }
+    box-shadow: 0 -3px 5px rgba(0, 0, 0, .1);
   }
 }
