@@ -44,7 +44,7 @@
     data() {
       return {
         newTodo: {
-          id: Math.ceil(Math.random() * 1000),
+          id: this.$store.state.nextTodoId,
           title: '',
           deadline: '',
           comment: '',
