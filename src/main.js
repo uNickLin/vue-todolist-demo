@@ -5,6 +5,8 @@ import App from './App'
 import router from './router'
 import Swal from 'sweetalert2'
 
+Vue.use(require('vue-moment'))
+
 Vue.prototype.$alert = Swal
 
 Vue.config.productionTip = false

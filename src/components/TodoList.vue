@@ -21,6 +21,7 @@
           @toggleImportant='toggleImportant',
           @toggleEditing='toggleEditing',
           @toggleCompleted='toggleCompleted',
+          @saveUpdateTodo='saveUpdateTodo',
           @deleteTodo='deleteTodo')
       .todo_list(v-if='commonTodos.length > 0')
         todo(
@@ -31,6 +32,7 @@
           @toggleImportant='toggleImportant',
           @toggleEditing='toggleEditing',
           @toggleCompleted='toggleCompleted',
+          @saveUpdateTodo='saveUpdateTodo',
           @deleteTodo='deleteTodo')
 </template>
 
@@ -61,6 +63,9 @@
       toggleCompleted(todo) {
         this.$emit('toggleCompleted', todo)
       },
+      saveUpdateTodo(updateTodo) {
+        this.$emit('saveUpdateTodo', updateTodo)
+      },
       deleteTodo(todo) {
         this.$emit('deleteTodo', todo)
       }
@@ -70,7 +75,7 @@
         if (this.todos.length === 0) {
           return 'Try to add something.'
         } else if (this.todos.filter(todo => !todo.isCompleted).length === 0) {
-          return 'You\' done everything !'
+          return 'You\'ve done everything !'
         } else if (this.todos.filter(todo => todo.isCompleted).length === 0) {
           return 'Keep working on it !'
         }

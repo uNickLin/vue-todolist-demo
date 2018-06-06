@@ -66,4 +66,9 @@ body{
     opacity: 0;
     transform: translateX(50px);
   }
+
+  // reset date picker style
+  .cov-vue-date{
+    display: block !important;
+  }
 }

@@ -23,6 +23,7 @@
           @toggleImportant='toggleImportant',
           @toggleEditing='toggleEditing',
           @toggleCompleted='toggleCompleted',
+          @saveUpdateTodo='saveUpdateTodo',
           @deleteTodo='deleteTodo')
       
 </template>
@@ -48,7 +49,7 @@ export default {
         {
           id: 1,
           title: 'Todo Title 1',
-          deadline: '2018-11-11 11:11',
+          deadline: '2018-11-11',
           comment: 'This is todo 1',
           isImportant: false,
           isEditing: false,
@@ -58,7 +59,7 @@ export default {
         {
           id: 2,
           title: 'Todo Title 2',
-          deadline: '2018-11-11 11:12',
+          deadline: '2018-11-12',
           comment: 'This is todo 2',
           isImportant: true,
           isEditing: false,
@@ -68,7 +69,7 @@ export default {
         {
           id: 3,
           title: 'Todo Title 3',
-          deadline: '2018-11-11 11:13',
+          deadline: '2018-11-13',
           comment: 'This is todo 3',
           isImportant: false,
           isEditing: false,
@@ -104,6 +105,14 @@ export default {
     },
     toggleCompleted(todo) {
       todo.isCompleted = !todo.isCompleted
+    },
+    saveUpdateTodo(updateTodo) {
+      let updateTarget = this.todos.find(todo => todo.id === updateTodo.id)
+      updateTarget.title = updateTodo.title
+      updateTarget.deadline = updateTodo.deadline
+      updateTarget.comment = updateTodo.comment
+      updateTarget.isImportant = updateTodo.isImportant
+      updateTarget.isEditing = false
     },
     deleteTodo(targetTodo) {
       this.$alert({
