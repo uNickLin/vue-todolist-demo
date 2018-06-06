@@ -1,7 +1,7 @@
 <template lang="pug">
   #todo_list
     .add_info
-      a(@click='$store.commit("changeView", "add todo")')
+      a.add_todo_btn(@click='$store.commit("changeView", "add todo")')
         i.fas.fa-pencil-alt
         label New Todo
       span {{ doneTodosCount }} todos has done, {{ undoneTodosCount }} todos left.

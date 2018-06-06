@@ -1,11 +1,22 @@
 #status_tabs{
   width: 100%;
+  @media (max-width: 478px) {
+    position: fixed;
+    z-index: 5;
+    bottom: 0;
+    left: 0;
+  }
   ul{
     @include flex;
     height: 100%;
     border-radius: 5px 5px 0 0;
     background: $white;
     border-bottom: 1px solid $grey;
+    @media (max-width: 478px) {
+      border-radius: 0;
+      border-bottom: none;
+      border-top: 1px solid $grey;
+    }
     li{
       width: 33.3%;
       a{
@@ -15,12 +26,20 @@
         padding: 15px;
         color: $darkgrey;
         transition: color .2s;
-        border-bottom: 5px solid transparent;        
+        border-bottom: 5px solid transparent;
+        @media (max-width: 478px) {
+          border-bottom: none;
+          border-top: 5px solid transparent;
+        } 
         &:hover, &.active{
           color: $darkgreen;
         }
         &.active{
           border-bottom: 5px solid $darkgreen;
+          @media (max-width: 478px) {
+            border-bottom: none;
+            border-top: 5px solid $darkgreen;
+          }
         }
       }
     }

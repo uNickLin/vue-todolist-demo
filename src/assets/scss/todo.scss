@@ -5,7 +5,14 @@ form.todo{
   background: $white;
   &.on_editing{
     position: relative;
-    z-index: 11;
+    z-index: 10;
+    @media (max-width: 478px) {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: calc(100% - 10px);
+      transform: translate(-50%, -50%)
+    }
   }
   &:not(:last-of-type){
     margin-bottom: 5px;
@@ -38,6 +45,7 @@ form.todo{
       display: block;
       width: 25px;
       height: 25px;
+      min-width: 25px;
       border: 2px solid rgba($darkgreen, .5);
       border-radius: 3px;
       margin-right: 10px;
@@ -77,6 +85,8 @@ form.todo{
         font-weight: bold;
         font-size: 1.2rem;
         transition: .65s cubic-bezier(0.25, 0.8, 0.25, 1);
+        word-wrap: break-word;
+        word-break: break-all;
       }
       .todo_detail{
         .todo_deadline, .todo_comment{
@@ -94,6 +104,7 @@ form.todo{
       }
     }
     .todo_main_actions{
+      min-width: 80px;
       a{
         display: inline-block;
         width: 25px;
