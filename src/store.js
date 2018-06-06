@@ -111,8 +111,13 @@ export const store = new Vuex.Store({
 			localStorage.setItem('vTODONextId', state.nextTodoId)
 		},
 		getLocalTodoList(state) {
-			state.todos = JSON.parse(localStorage.getItem('vTODOlist'))
-			state.nextTodoId = localStorage.getItem('vTODONextId')
+			let localdata = JSON.parse(localStorage.getItem('vTODOlist')) || []
+			localdata.forEach(todo => {
+				todo.isOpen = false
+				todo.isEditing = false
+			})
+			state.todos = localdata
+			state.nextTodoId = parseInt(localStorage.getItem('vTODONextId')) || 0
 		}
 	}
 })
