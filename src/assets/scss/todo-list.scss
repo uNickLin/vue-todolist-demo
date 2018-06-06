@@ -25,6 +25,11 @@
   .list_container{
     background: $white;
     border-radius: 0 0 5px 5px;
+    .empty{
+      padding: 10px;
+      text-align: center;
+      color: $grey;
+    }
     .todo_list{
       padding: 5px;
       &:not(:last-of-type){

@@ -9,9 +9,9 @@
       :currentTab='currentTab', 
       :tabs='tabList',
       @changeTab='changeTab')
-    .list_container.empty(v-if='todesFiltered.length === 0')
-      p Try to add something.
     .list_container
+      .empty(v-if='todesFiltered.length === 0')
+        p {{ emptyText }}
       .todo_list.importants(v-if='importantTodos.length > 0')
         todo(
           v-for='event in importantTodos', 
@@ -66,6 +66,15 @@
       }
     },
     computed: {
+      emptyText() {
+        if (this.todos.length === 0) {
+          return 'Try to add something.'
+        } else if (this.todos.filter(todo => !todo.isCompleted).length === 0) {
+          return 'You\' done everything !'
+        } else if (this.todos.filter(todo => todo.isCompleted).length === 0) {
+          return 'Keep working on it !'
+        }
+      },
       todesFiltered() {
         switch (this.currentTab) {
           case 'My Tasks':
