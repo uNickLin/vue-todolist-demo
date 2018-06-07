@@ -175,7 +175,7 @@
     },
     filters: {
       toCapitalize(val) {
-        return val.replace(/\b\w/g, l => l.toUpperCase())
+        return val.charAt(0).toUpperCase() + val.slice(1)
       }
     }
   }

@@ -12,38 +12,38 @@ export const store = new Vuex.Store({
 		tabList: [
 			'My Tasks', 'In Progress', 'Completed'
 		],
-		nextTodoId: 0,
+		nextTodoId: 4,
 		todos: [
-			// {
-			// 	id: 1,
-			// 	title: 'Todo Title 1',
-			// 	deadline: '2018-11-11',
-			// 	comment: 'This is todo 1',
-			// 	isImportant: false,
-			// 	isEditing: false,
-			// 	isCompleted: false,
-			// 	isOpen: true
-			// },
-			// {
-			// 	id: 2,
-			// 	title: 'Todo Title 2',
-			// 	deadline: '2018-11-12',
-			// 	comment: 'This is todo 2',
-			// 	isImportant: true,
-			// 	isEditing: false,
-			// 	isCompleted: false,
-			// 	isOpen: false
-			// },
-			// {
-			// 	id: 3,
-			// 	title: 'Todo Title 3',
-			// 	deadline: '2018-11-13',
-			// 	comment: 'This is todo 3',
-			// 	isImportant: false,
-			// 	isEditing: false,
-			// 	isCompleted: true,
-			// 	isOpen: false
-			// }
+			{
+				id: 1,
+				title: 'Drag and sort',
+				deadline: '2018-06-08',
+				comment: 'Still working on Muuri.js doc, will apply Sortable.js if Muuri fail ...',
+				isImportant: true,
+				isEditing: false,
+				isCompleted: false,
+				isOpen: true
+			},
+			{
+				id: 2,
+				title: 'Localstorage fail on PWA',
+				deadline: '2018-06-08',
+				comment: 'Since PWA is based on web, I thought it would work, but I was wrong ...',
+				isImportant: false,
+				isEditing: false,
+				isCompleted: false,
+				isOpen: false
+			},
+			{
+				id: 3,
+				title: 'Write your todo now !',
+				deadline: '2020-12-31',
+				comment: '',
+				isImportant: false,
+				isEditing: false,
+				isCompleted: true,
+				isOpen: true
+			}
 		]
 	},
 	mutations: {
@@ -116,13 +116,13 @@ export const store = new Vuex.Store({
 			localStorage.setItem('vTODONextId', state.nextTodoId)
 		},
 		getLocalTodoList(state) {
-			let localdata = JSON.parse(localStorage.getItem('vTODOlist')) || []
+			let localdata = JSON.parse(localStorage.getItem('vTODOlist')) || state.todos
 			localdata.forEach(todo => {
-				todo.isOpen = false
+				// todo.isOpen = false
 				todo.isEditing = false
 			})
 			state.todos = localdata
-			state.nextTodoId = parseInt(localStorage.getItem('vTODONextId')) || 0
+			state.nextTodoId = parseInt(localStorage.getItem('vTODONextId')) || state.nextTodoId
 			state.hasNotify = JSON.parse(localStorage.getItem('vTODOHasNotify')) || false
 		}
 	}
