@@ -19,7 +19,7 @@ export const store = new Vuex.Store({
 				title: 'Drag and sort',
 				deadline: '2018-06-08',
 				comment: 'Still working on Muuri.js doc, will apply Sortable.js if Muuri fail ...',
-				isImportant: true,
+				isImportant: false,
 				isEditing: false,
 				isCompleted: false,
 				isOpen: true
@@ -28,11 +28,11 @@ export const store = new Vuex.Store({
 				id: 2,
 				title: 'Localstorage fail on PWA',
 				deadline: '2018-06-08',
-				comment: 'Since PWA is based on web, I thought it would work, but I was wrong ...',
-				isImportant: false,
+				comment: 'Turns out there\'s nothing to do with localstorage, it\'s my stupid mistake in manifest: start_url: "/index.html", it should be "/" ...',
+				isImportant: true,
 				isEditing: false,
-				isCompleted: false,
-				isOpen: false
+				isCompleted: true,
+				isOpen: true
 			},
 			{
 				id: 3,
@@ -41,8 +41,8 @@ export const store = new Vuex.Store({
 				comment: '',
 				isImportant: false,
 				isEditing: false,
-				isCompleted: true,
-				isOpen: true
+				isCompleted: false,
+				isOpen: false
 			}
 		]
 	},
