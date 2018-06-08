@@ -26,7 +26,6 @@ export const store = new Vuex.Store({
 		todos: [
 			{
 				id: 1,
-				sort: 1,
 				title: 'Drag and sort',
 				deadline: '2018-06-08',
 				comment: 'Still working on Muuri.js doc, will apply Sortable.js if Muuri fail ...',
@@ -37,18 +36,16 @@ export const store = new Vuex.Store({
 			},
 			{
 				id: 2,
-				sort: 2,
 				title: 'Localstorage fail on PWA',
 				deadline: '2018-06-08',
 				comment: 'Turns out there\'s nothing to do with localstorage, it\'s my stupid mistake in manifest: start_url: "/index.html", it should be "/" ...',
 				isImportant: true,
 				isEditing: false,
 				isCompleted: true,
-				isOpen: true
+				isOpen: false
 			},
 			{
 				id: 3,
-				sort: 3,
 				title: 'Write your todo now !',
 				deadline: '2020-12-31',
 				comment: '',
