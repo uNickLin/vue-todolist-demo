@@ -44,7 +44,8 @@
         datePicker(
           v-if='todo.isEditing',
           :date='startTime',
-          :option='option'
+          :option='option',
+          :limit='limit'
         )
         //- input.input(
         //-   v-if='todo.isEditing', 
