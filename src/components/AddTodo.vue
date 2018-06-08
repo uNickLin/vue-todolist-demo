@@ -17,7 +17,8 @@
         label Deadline
         datePicker(
           :date='startTime',
-          :option='option'
+          :option='option',
+          :limit='limit'
         )
         //- input.input(
         //-   type="datetime-local", 
@@ -100,13 +101,10 @@
           month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
           format:"YYYY-MM-DD HH:mm"
         },
-        limit: [{
-          type: 'weekday',
-          available: [1, 2, 3, 4, 5]
-        },
+        limit: [
         {
           type: 'fromto',
-          from: '2020-12-31',
+          from: new Date(),
           to: '2020-12-31'
         }]
       }

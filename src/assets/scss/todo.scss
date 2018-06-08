@@ -81,6 +81,16 @@ form.todo{
           opacity: 0.4;
         }
       }
+      &.has_expired{
+        h2, .todo_deadline span{
+          color: $red;
+        }
+      }
+      &.completed.has_expired{
+        h2{
+          color: rgba($red, .6);
+        }
+      }
       h2{
         font-weight: bold;
         font-size: 1.2rem;

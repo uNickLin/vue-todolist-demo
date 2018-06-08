@@ -14,7 +14,7 @@
           @click.stop='', 
           type="checkbox", 
           :checked='todo.isCompleted')
-      .todo_main_head(:class='{completed: todo.isCompleted}')
+      .todo_main_head(:class='{completed: todo.isCompleted, has_expired: todo.hasExpired}')
         h2(v-if='!todo.isEditing') {{ todo.title | toCapitalize }}
         input.input(
           @click.stop='',
@@ -25,7 +25,7 @@
         .todo_detail
           .todo_deadline(v-if='todo.deadline')
             i.far.fa-calendar-alt
-            span {{ todo.deadline }}
+            span {{ todo.hasExpired ? `${todo.deadline} (Expired)` : todo.deadline }}
           .todo_comment(v-if='todo.comment')
             i.far.fa-comment-dots
       .todo_main_actions
@@ -125,13 +125,10 @@
             month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
             format:"YYYY-MM-DD HH:mm"
           },
-          limit: [{
-            type: 'weekday',
-            available: [1, 2, 3, 4, 5]
-          },
+          limit: [
           {
             type: 'fromto',
-            from: '2020-12-31',
+            from: new Date(),
             to: '2020-12-31'
           }]
       }

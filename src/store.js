@@ -21,7 +21,8 @@ export const store = new Vuex.Store({
 			isImportant: false,
 			isEditing: false,
 			isCompleted: false,
-			isOpen: false
+			isOpen: false,
+			hasExpired: false
 		},
 		todos: [
 			{
@@ -32,17 +33,19 @@ export const store = new Vuex.Store({
 				isImportant: false,
 				isEditing: false,
 				isCompleted: false,
-				isOpen: true
+				isOpen: true,
+				hasExpired: false
 			},
 			{
 				id: 2,
 				title: 'Localstorage fail on PWA',
-				deadline: '2018-06-08',
+				deadline: '2018-06-07',
 				comment: 'Turns out there\'s nothing to do with localstorage, it\'s my stupid mistake in manifest: start_url: "/index.html", it should be "/" ...',
 				isImportant: true,
 				isEditing: false,
 				isCompleted: true,
-				isOpen: false
+				isOpen: false,
+				hasExpired: true
 			},
 			{
 				id: 3,
@@ -52,7 +55,8 @@ export const store = new Vuex.Store({
 				isImportant: false,
 				isEditing: false,
 				isCompleted: false,
-				isOpen: false
+				isOpen: false,
+				hasExpired: false
 			}
 		]
 	},
@@ -134,8 +138,12 @@ export const store = new Vuex.Store({
 		getLocalTodoList(state) {
 			let localdata = JSON.parse(localStorage.getItem('vTODOlist')) || state.todos
 			localdata.forEach(todo => {
-				// todo.isOpen = false
+				todo.isOpen = false
 				todo.isEditing = false
+				let date = todo.deadline.split('-') // [2011, 11, 11]
+				if (new Date(date[0], date[1], date[2]) < new Date()) {
+					todo.hasExpired = true
+				}
 			})
 			state.todos = localdata
 			state.nextTodoId = parseInt(localStorage.getItem('vTODONextId')) || state.nextTodoId
