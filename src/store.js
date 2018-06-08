@@ -13,9 +13,20 @@ export const store = new Vuex.Store({
 			'My Tasks', 'In Progress', 'Completed'
 		],
 		nextTodoId: 4,
+		tempTodo: {
+			id: null,
+			title: '',
+			deadline: '',
+			comment: '...',
+			isImportant: false,
+			isEditing: false,
+			isCompleted: false,
+			isOpen: false
+		},
 		todos: [
 			{
 				id: 1,
+				sort: 1,
 				title: 'Drag and sort',
 				deadline: '2018-06-08',
 				comment: 'Still working on Muuri.js doc, will apply Sortable.js if Muuri fail ...',
@@ -26,6 +37,7 @@ export const store = new Vuex.Store({
 			},
 			{
 				id: 2,
+				sort: 2,
 				title: 'Localstorage fail on PWA',
 				deadline: '2018-06-08',
 				comment: 'Turns out there\'s nothing to do with localstorage, it\'s my stupid mistake in manifest: start_url: "/index.html", it should be "/" ...',
@@ -36,6 +48,7 @@ export const store = new Vuex.Store({
 			},
 			{
 				id: 3,
+				sort: 3,
 				title: 'Write your todo now !',
 				deadline: '2020-12-31',
 				comment: '',
@@ -47,6 +60,12 @@ export const store = new Vuex.Store({
 		]
 	},
 	mutations: {
+		setTempTodoForEdit(state, editTodo) {
+			state.tempTodo = Object.assign({}, editTodo)
+		},
+		updateEditDeadline(state, newDeadline) {
+			state.tempTodo.deadline = newDeadline
+		},
 		closeNotify(state) {
 			state.hasNotify = true
 			localStorage.setItem('vTODOHasNotify', JSON.stringify(state.hasNotify))

@@ -79,17 +79,6 @@
     },
     data() {
       return {
-        tempTodo: {
-          id: null,
-          title: '',
-          deadline: '',
-          comment: '...',
-          isImportant: false,
-          isEditing: false,
-          isCompleted: false,
-          isOpen: false
-        },
-
         // myDatepicker
           startTime: {
             time: this.todo.deadline // get value here
@@ -149,8 +138,8 @@
     },
     methods: {
       editTodo(todo) {
-        this.tempTodo = Object.assign({}, todo)
-        this.startTime.time = this.tempTodo.deadline
+        this.$store.commit('setTempTodoForEdit', todo)
+        this.startTime.time = this.$store.state.tempTodo.deadline
         this.$store.commit("toggleEditing", todo) // only change status
       },
       cancelEdit() {
@@ -168,9 +157,14 @@
         })
       },
       saveEdit() {
-        this.tempTodo.deadline = this.startTime.time
+        this.$store.commit('updateEditDeadline', this.startTime.time)
         this.tempTodo.isImportant = this.todo.isImportant
         this.$store.commit('saveUpdateTodo', this.tempTodo)
+      }
+    },
+    computed: {
+      tempTodo() {
+        return this.$store.state.tempTodo
       }
     },
     filters: {
