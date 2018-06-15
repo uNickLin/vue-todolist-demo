@@ -2,7 +2,7 @@
   #todo_list
     .add_info
       a.add_todo_btn(@click='$store.commit("changeView", "add todo")')
-        i.fas.fa-pencil-alt
+        i.fa.fa-pencil
         label New Todo
       span {{ doneTodosCount }} todos has done, {{ undoneTodosCount }} todos left.
     tabs(
