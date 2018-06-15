@@ -5,11 +5,11 @@
     )
     .brief_content(@click='$store.commit("toggleFullContent", todo)')
       a.drag_handler
-        i.fas.fa-ellipsis-v
+        i.fa.fa-ellipsis-v
       label(
         @click.stop='$store.commit("toggleCompleted", todo)', 
         :class='{checked: todo.isCompleted}')
-        i.fas.fa-check(:class='{"checked-in": todo.isCompleted}')
+        i.fa.fa-check(:class='{"checked-in": todo.isCompleted}')
         input(
           @click.stop='', 
           type="checkbox", 
@@ -24,21 +24,21 @@
           v-model='tempTodo.title')
         .todo_detail
           .todo_deadline(v-if='todo.deadline')
-            i.far.fa-calendar-alt
+            i.fa.fa-calendar-alt
             span {{ todo.hasExpired ? `${todo.deadline} (Expired)` : todo.deadline }}
           .todo_comment(v-if='todo.comment')
-            i.far.fa-comment-dots
+            i.fa.fa-comment-dots
       .todo_main_actions
         a(@click.stop='$store.commit("toggleImportant", todo)')
-          i(:class='todo.isImportant ? "fas fa-star" : "far fa-star"')
+          i(:class='todo.isImportant ? "fa fa-star" : "fa fa-star-o"')
         a(@click.stop='editTodo(todo)')
-          i.fas.fa-edit(:class='{on_editing: todo.isEditing}')
+          i.fa.fa-edit(:class='{on_editing: todo.isEditing}')
         a(@click.stop='$store.commit("deleteTodo", todo)')
-          i.fas.fa-trash-alt
+          i.fa.fa-trash
 
     .full_content(:class='{active: todo.isOpen}')
       .field
-        i.far.fa-calendar-alt 
+        i.fa.fa-calendar-alt 
         strong Deadline
         p(v-if='!todo.isEditing') {{ todo.deadline }}
         datePicker(
@@ -52,7 +52,7 @@
         //-   type="datetime-local", 
         //-   v-model='todo.deadline')
       .field
-        i.far.fa-comment-dots 
+        i.fa.fa-comment-dots 
         strong {{ tempTodo.comment ? 'Comment' : 'No Comment'}}
         p(v-if='!todo.isEditing') {{ todo.comment }}
         textarea.input(
@@ -60,10 +60,10 @@
           v-model='tempTodo.comment')
     .event_actions(v-if='todo.isEditing')
       button(@click.prevent='cancelEdit').cancel.form_btn
-        i.fas.fa-times
+        i.fa.fa-times
         span Cancel
       button(@submit='saveEdit').save.form_btn
-        i.fas.fa-save
+        i.fa.fa-save
         span Save
 
 </template>

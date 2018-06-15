@@ -2,10 +2,10 @@
   form#add_todo_template(@submit.prevent='addTodo')
     .add_todo_head
       a(@click='cancelAdd')
-        i.fas.fa-chevron-left
+        i.fa.fa-arrow-left
       h2 New Todo
       a(@click='newTodo.isImportant = !newTodo.isImportant')
-        i(:class='newTodo.isImportant ? "fas fa-star" : "far fa-star"')
+        i(:class='newTodo.isImportant ? "fa fa-star" : "fa fa-star-o"')
     .add_todo_content
       .field
         label Title
@@ -28,10 +28,10 @@
         textarea.input(v-model='newTodo.comment')
     .add_todo_footer
       button(@click.prevent='cancelAdd').cancel.form_btn
-        i.fas.fa-times
+        i.fa.fa-times
         span Cancel
       button(@submit='addTodo').save.form_btn
-        i.fas.fa-save
+        i.fa.fa-save
         span Save
 </template>
 
