@@ -124,7 +124,7 @@ form.todo{
         i{
           opacity: 0.7;
           transition: .65s;
-          &.fas.fa-star{
+          &.fa.fa-star{
             opacity: 1;
             animation: scaleStar .65s;
             @keyframes scaleStar {
