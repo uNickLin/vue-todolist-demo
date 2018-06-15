@@ -24,10 +24,10 @@
           v-model='tempTodo.title')
         .todo_detail
           .todo_deadline(v-if='todo.deadline')
-            i.fa.fa-calendar-alt
+            i.fa.fa-calendar-check-o
             span {{ todo.hasExpired ? `${todo.deadline} (Expired)` : todo.deadline }}
           .todo_comment(v-if='todo.comment')
-            i.fa.fa-comment-dots
+            i.fa.fa-commenting-o
       .todo_main_actions
         a(@click.stop='$store.commit("toggleImportant", todo)')
           i(:class='todo.isImportant ? "fa fa-star" : "fa fa-star-o"')
@@ -38,7 +38,7 @@
 
     .full_content(:class='{active: todo.isOpen}')
       .field
-        i.fa.fa-calendar-alt 
+        i.fa.fa-calendar-check-o
         strong Deadline
         p(v-if='!todo.isEditing') {{ todo.deadline }}
         datePicker(
@@ -52,7 +52,7 @@
         //-   type="datetime-local", 
         //-   v-model='todo.deadline')
       .field
-        i.fa.fa-comment-dots 
+        i.fa.fa-commenting-o
         strong {{ tempTodo.comment ? 'Comment' : 'No Comment'}}
         p(v-if='!todo.isEditing') {{ todo.comment }}
         textarea.input(
